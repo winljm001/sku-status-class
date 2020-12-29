@@ -2,7 +2,7 @@
   "name": "sku-status-class",
   "version": "1.0.2",
   "description": "sku",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "release": "dotenv release-it"
