@@ -1,6 +1,6 @@
 {
   "name": "sku-status-class",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "sku",
   "main": "dist/index.js",
   "files": [
