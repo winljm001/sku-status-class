@@ -57,7 +57,7 @@ export default class Sku {
           if (selectableSpecIds.indexOf(item.id) === -1) {
             specStatus = 0;
           } else {
-            if (selected.findIndex(item.id) === -1) {
+            if (selected.indexOf(item.id) === -1) {
               specStatus = 1;
             } else {
               specStatus = 2;
@@ -107,7 +107,7 @@ function getFlagArrs(m: any, n: any) {
     while (!isEnd) {
       var leftCnt = 0;
       for (var i = 0; i < m - 1; i++) {
-        if (flagArr[i] == 1 && flagArr[i + 1] == 0) {
+        if (flagArr[i] === 1 && flagArr[i + 1] === 0) {
           for (var j = 0; j < i; j++) {
             flagArr[j] = j < leftCnt ? 1 : 0;
           }
