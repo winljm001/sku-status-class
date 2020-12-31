@@ -53,9 +53,21 @@ export default class Sku {
       return {
         ...v,
         items: v.items.map((item: any) => {
+          let specStatus = 0;
+          if (selectableSpecIds.indexOf(item.id) === -1) {
+            specStatus = 0;
+          } else {
+            if (selected.findIndex(item.id) === -1) {
+              specStatus = 1;
+            } else {
+              specStatus = 2;
+            }
+          }
+
           return {
             ...item,
-            status: selectableSpecIds.indexOf(item.id) === -1 ? 0 : 1,
+            // 不可选：0 可选：1 已选中：2
+            specStatus,
           };
         }),
       };
