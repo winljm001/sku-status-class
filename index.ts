@@ -41,15 +41,24 @@ export default class Sku {
     return resMap;
   }
   getSpecListStatus(selected: string[]) {
-    const selectedKeys = selected.sort().join();
-    let selectableSpecIds: string[] = [];
-    this.specMap[selectedKeys].forEach((v: any) => {
-      selectableSpecIds = selectableSpecIds.concat(
-        v.specIds.filter((v: any) => !selectableSpecIds.includes(v))
-      );
-    });
-
     return this.specList.map((v: any) => {
+      const temp = JSON.parse(JSON.stringify(selected));
+      selected.forEach((selectedItem) => {
+        const itemIndex = v.items.find((specItem: any) => {
+          return specItem.id === selectedItem;
+        });
+        if (itemIndex) {
+          const index = temp.indexOf(itemIndex?.id);
+          temp.splice(index, 1);
+        }
+      });
+      const selectedKeys = temp.sort().join();
+      let selectableSpecIds: string[] = [];
+      this.specMap[selectedKeys].forEach((v: any) => {
+        selectableSpecIds = selectableSpecIds.concat(
+          v.specIds.filter((v: any) => !selectableSpecIds.includes(v))
+        );
+      });
       return {
         ...v,
         items: v.items.map((item: any) => {
