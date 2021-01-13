@@ -27,7 +27,6 @@ export default class Sku {
   getSpecMap(skuList: any) {
     const resMap: any = {};
     skuList.forEach((v: any) => {
-      // console.log(v);
       const allKey = arrayCombine(v.specIds);
       allKey.forEach((item) => {
         const resKey = item.sort().join();
@@ -54,7 +53,7 @@ export default class Sku {
       });
       const selectedKeys = temp.sort().join();
       let selectableSpecIds: string[] = [];
-      this.specMap[selectedKeys].forEach((v: any) => {
+      this.specMap[selectedKeys]?.forEach((v: any) => {
         selectableSpecIds = selectableSpecIds.concat(
           v.specIds.filter((v: any) => !selectableSpecIds.includes(v))
         );
