@@ -3,6 +3,7 @@ export interface SKUInstance {
    * sku属性，具有规格id组合的数组
    */
   specIds: string[];
+  [key: string]: any;
 }
 export interface SpecInstance {
   /**
@@ -11,7 +12,9 @@ export interface SpecInstance {
   items: {
     name: string;
     id: string;
+    [key: string]: any;
   }[];
+  [key: string]: any;
 }
 
 /**
