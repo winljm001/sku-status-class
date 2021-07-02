@@ -10,8 +10,12 @@ export interface SpecInstance {
    * 规格具有规格选项数组包含name和id
    */
   items: {
+    /**规格选项name */
     name: string;
+    /**规格选项id */
     id: string;
+    /**规格选项状态，返回的时候有不需要传 */
+    specStatus?: number;
     [key: string]: any;
   }[];
   [key: string]: any;
@@ -58,7 +62,7 @@ export default class Sku {
     });
     return resMap;
   }
-  getSpecListStatus(selected: string[]) {
+  getSpecListStatus(selected: string[]): SpecInstance[] {
     return this.specList.map((v) => {
       const temp = JSON.parse(JSON.stringify(selected));
       selected.forEach((selectedItem) => {
