@@ -1,3 +1,19 @@
+export interface SKUInstance {
+  /**
+   * sku属性，具有规格id组合的数组
+   */
+  specIds: string[];
+}
+export interface SpecInstance {
+  /**
+   * 规格具有规格选项数组包含name和id
+   */
+  items: {
+    name: string;
+    id: string;
+  }[];
+}
+
 /**
  * Sku 选择类
  * this.specMap:选项与sku对应的map
@@ -7,16 +23,16 @@
  */
 export default class Sku {
   specMap: any;
-  skuList: any;
-  specList: any;
-  constructor(skuList: any, specList: any) {
+  skuList: SKUInstance[];
+  specList: SpecInstance[];
+  constructor(skuList: SKUInstance[], specList: SpecInstance[]) {
     this.specMap = this.getSpecMap(skuList);
     this.skuList = skuList;
     this.specList = specList;
   }
   getSkuGoods(selected: string[]) {
     if (selected.length === this.specList.length) {
-      const resSku = this.skuList.find((v: any) => {
+      const resSku = this.skuList.find((v) => {
         return v.specIds.sort().join() === selected.sort().join();
       });
       return resSku ? resSku : null;
@@ -24,9 +40,9 @@ export default class Sku {
       return null;
     }
   }
-  getSpecMap(skuList: any) {
+  getSpecMap(skuList: SKUInstance[]) {
     const resMap: any = {};
-    skuList.forEach((v: any) => {
+    skuList.forEach((v) => {
       const allKey = arrayCombine(v.specIds);
       allKey.forEach((item) => {
         const resKey = item.sort().join();
@@ -40,10 +56,10 @@ export default class Sku {
     return resMap;
   }
   getSpecListStatus(selected: string[]) {
-    return this.specList.map((v: any) => {
+    return this.specList.map((v) => {
       const temp = JSON.parse(JSON.stringify(selected));
       selected.forEach((selectedItem) => {
-        const itemIndex = v.items.find((specItem: any) => {
+        const itemIndex = v.items.find((specItem) => {
           return specItem.id === selectedItem;
         });
         if (itemIndex) {
@@ -60,7 +76,7 @@ export default class Sku {
       });
       return {
         ...v,
-        items: v.items.map((item: any) => {
+        items: v.items.map((item) => {
           let specStatus = 0;
           if (selectableSpecIds.indexOf(item.id) === -1) {
             specStatus = 0;
