@@ -38,14 +38,10 @@ export default class Sku {
     this.specList = specList;
   }
   getSkuGoods(selected: string[]) {
-    if (selected.length === this.specList.length) {
-      const resSku = this.skuList.find((v) => {
-        return v.specIds.sort().join() === selected.sort().join();
-      });
-      return resSku ? resSku : null;
-    } else {
-      return null;
-    }
+    const resSku = this.skuList.find((v) => {
+      return v.specIds.sort().join() === selected.sort().join();
+    });
+    return resSku ? resSku : null;
   }
   getSpecMap(skuList: SKUInstance[]) {
     const resMap: any = {};
