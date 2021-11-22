@@ -20,7 +20,22 @@ export interface SpecInstance {
   }[];
   [key: string]: any;
 }
-
+/**
+ * 过滤空规格
+ * @param skuList sku可选项
+ * @param specList 规格列表
+ * @returns 
+ */
+export const  filterSpec=(skuList: SKUInstance[], specList: SpecInstance[])=>{
+  let allSpecIds:string[]=[]
+  for (let i = 0; i < skuList.length; i++) {
+    const tempSpecIds = skuList[i].specIds;
+    allSpecIds=allSpecIds.concat(tempSpecIds.filter(v => !allSpecIds.includes(v)))
+  }
+  return specList?.filter(v=>{
+    return v?.items?.map(item=>item?.id)?.filter(oItem => allSpecIds.includes(oItem))?.length>0
+  })
+}
 /**
  * Sku 选择类
  * this.specMap:选项与sku对应的map
@@ -59,6 +74,7 @@ export default class Sku {
     return resMap;
   }
   getSpecListStatus(selected: string[]): SpecInstance[] {
+    
     return this.specList.map((v) => {
       const temp = JSON.parse(JSON.stringify(selected));
       selected.forEach((selectedItem) => {

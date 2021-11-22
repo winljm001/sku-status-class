@@ -1,4 +1,4 @@
-import Sku from "./index";
+import Sku, { filterSpec } from "./index";
 const skuListData = [
   { specIds: ["100", "010"], stock: 12, price: 1, img: "1" },
   { specIds: ["100", "020"], stock: 12, price: 1, img: "1" },
@@ -20,7 +20,18 @@ const specListData = [
       { name: "潘苹果", id: "020" },
     ],
   },
+  {
+    name: "等级2",
+    items: [
+      { name: "A", id: "310" },
+      { name: "B", id: "320" },
+    ],
+  },
 ];
+// 过滤空的规格
+const filterRes=filterSpec(skuListData,specListData)
+console.log(filterRes);
+
 const selected = ["100", "010"];
 const a = new Sku(skuListData, specListData);
 // 获取规格状态
