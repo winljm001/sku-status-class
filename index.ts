@@ -24,7 +24,7 @@ export interface SpecInstance {
  * 过滤空规格
  * @param skuList sku可选项
  * @param specList 规格列表
- * @param filterOption 是否过滤规划选项
+ * @param filterOption 是否过滤规格选项
  * @returns 
  */
 export const  filterSpec=(skuList: SKUInstance[], specList: SpecInstance[],filterOption:boolean=false)=>{
