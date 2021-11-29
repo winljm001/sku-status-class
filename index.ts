@@ -24,17 +24,25 @@ export interface SpecInstance {
  * 过滤空规格
  * @param skuList sku可选项
  * @param specList 规格列表
+ * @param filterOption 是否过滤规划选项
  * @returns 
  */
-export const  filterSpec=(skuList: SKUInstance[], specList: SpecInstance[])=>{
+export const  filterSpec=(skuList: SKUInstance[], specList: SpecInstance[],filterOption:boolean=false)=>{
   let allSpecIds:string[]=[]
   for (let i = 0; i < skuList.length; i++) {
     const tempSpecIds = skuList[i].specIds;
     allSpecIds=allSpecIds.concat(tempSpecIds.filter(v => !allSpecIds.includes(v)))
   }
-  return specList?.filter(v=>{
-    return v?.items?.map(item=>item?.id)?.filter(oItem => allSpecIds.includes(oItem))?.length>0
-  })
+  if(filterOption){
+    return specList?.map(v=>{
+      return {...v,items:v?.items?.filter(oItem => allSpecIds.includes(oItem.id))}
+    })?.filter(v=>v?.items?.length>0)
+  }else{
+
+    return specList?.filter(v=>{
+      return v?.items?.map(item=>item?.id)?.filter(oItem => allSpecIds.includes(oItem))?.length>0
+    })
+  }
 }
 /**
  * Sku 选择类

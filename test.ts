@@ -18,6 +18,7 @@ const specListData = [
     items: [
       { name: "农夫山泉", id: "010" },
       { name: "潘苹果", id: "020" },
+      { name: "品牌3", id: "030" },
     ],
   },
   {
@@ -29,8 +30,8 @@ const specListData = [
   },
 ];
 // 过滤空的规格
-const filterRes=filterSpec(skuListData,specListData)
-console.log(filterRes);
+const filterRes=filterSpec(skuListData,specListData,true)
+console.log(JSON.stringify(filterRes));
 
 const selected = ["100", "010"];
 const a = new Sku(skuListData, specListData);
